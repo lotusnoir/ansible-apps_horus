@@ -30,7 +30,7 @@ horus_type:
   - agent
   - query
   - dispatcher
-#horus_version:
-#  agent: ""
-#  query: ""
-#  dispatch: ""
+horus_version:
+  agent: ""
+  query: ""
+  dispatch: ""

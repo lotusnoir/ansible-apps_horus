@@ -1,6 +1,6 @@
 ---
 #install
-horus_git_repo:                    "git@github.com:kosctelecom/horus.git"
+horus_git_repo:                    "https://github.com/kosctelecom/horus.git"
 horus_src_dir:                     "/tmp/horus"
 horus_log_dir:                     "/var/log/horus"
 #agent

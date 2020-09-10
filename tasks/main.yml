@@ -1,0 +1,9 @@
+---
+- include_tasks: install.yml
+  with_items: "{{ horus_type }}"
+
+- name: "Remove source directory"
+  file:
+    path: "{{ horus_src_dir }}"
+    state: absent
+  delegate_to: localhost

@@ -1,0 +1,37 @@
+---
+file:
+  /var/log/horus:
+    exists: true
+    mode: "0755"
+    filetype: directory
+  /usr/local/bin/horus-agent:
+    exists: true
+    mode: "0755"
+  /usr/local/bin/horus-dispatcher:
+    exists: true
+    mode: "0755"
+  /usr/local/bin/horus-query:
+    exists: true
+    mode: "0755"
+package:
+  fping:
+    installed: true
+  cron:
+    installed: true
+port:
+  tcp:80:
+    listening: true
+    ip:
+      - '0.0.0.0'
+service:
+  horus-agent:
+    enabled: true
+    running: true
+  horus-dispatcher:
+    enabled: true
+    running: true
+process:
+  horus-agent:
+    running: true
+  horus-dispatcher:
+    running: true

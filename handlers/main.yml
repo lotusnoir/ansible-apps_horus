@@ -1,0 +1,6 @@
+---
+- name: restart horus-agent
+  service: name=horus-agent state=restarted
+
+- name: restart horus-dispatcher
+  service: name=horus-dispatcher state=restarted

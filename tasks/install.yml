@@ -1,0 +1,85 @@
+---
+- name: Check if horus-{{ item }} binary exist
+  stat:
+    path: '/usr/local/bin/horus-{{ item }}'
+  register: horus_binary
+
+- name: Check version for horus-{{ item }}
+  command: /usr/local/bin/horus-{{ item }} --version | grep Revision
+  changed_when: false
+  register: horus_binary_version
+  when: horus_binary.stat.exists
+
+- name: Installation process
+  when: (not horus_binary.stat.exists) or (horus_binary_version is defined and horus_version[item] not in horus_binary_version.stdout) or not horus_version[item]
+  block:
+    - name: "Install fping when agent type"
+      package:
+        name: fping
+        state: present
+      when: item == "agent"
+
+    - name: "Create log directory {{ horus_log_dir }}"
+      file:
+        path: "{{ horus_log_dir }}"
+        state: directory
+        mode: 0755
+
+    - name: "Add git repo Horus on {{ horus_src_dir }}"
+      become: false
+      git:
+        repo: "{{ horus_git_repo }}"
+        dest: "{{ horus_src_dir }}"
+      delegate_to: localhost
+      run_once: true
+      register: src_dl
+
+    - name: "Build horus sources"
+      become: false
+      make:
+        chdir: "{{ horus_src_dir }}"
+        target: all
+      delegate_to: localhost
+      run_once: true
+      when: src_dl.changed
+
+    - name: "Stop horus-{{ item }} service if exist"
+      systemd:
+        name: "horus-{{ item }}"
+        state: stopped
+      when: horus_binary.stat.exists and item != "query"
+
+    - name: "Propagate {{ item }} binaries"
+      copy:
+        src: "{{ horus_src_dir }}/cmd/bin/horus-{{ item }}"
+        dest: "/usr/local/bin/"
+        mode: 0755
+        owner: root
+        group: root
+
+- when: item != "query"
+  block:
+    - name: "Create symtemd for {{ item }}"
+      template:
+        src: horus-{{ item }}.service
+        dest: /lib/systemd/system/
+        mode: 0644
+
+    - name: "Start horus-{{ item }} service"
+      systemd:
+        name: horus-{{ item }}
+        state: started
+        enabled: yes
+        daemon_reload: yes
+
+    - name: "Ensure crontab exist"
+      package:
+        name: cron
+        state: present
+
+    - name: "Add rule Remove old horus logs on crontab"
+      cron:
+        name: "remove old horus logs"
+        minute: "0"
+        hour: "1"
+        job: "find /var/log/horus -type f -mtime +3 -delete"

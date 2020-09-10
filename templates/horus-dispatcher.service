@@ -1,0 +1,19 @@
+[Unit]
+
+[Service]
+Type=simple
+Environment=http_proxy=
+ExecStart=/usr/local/bin/horus-dispatcher -p {{ horus_dispatcher_port }} \
+        --db-snmp-freq {{ horus_dispatcher_snmp_freq }} \
+        --db-ping-freq {{ horus_dispatcher_ping_freq }} \
+        --agent-keepalive-freq {{ horus_dispatcher_keepalive_freq }} \
+        --max-load-delta {{ horus_dispatcher_max_delta }} \
+        --poll-error-retention-period 2 --ping-batch-count 100 \
+        --dsn "postgres://{{ horus_psql_user }}:{{ horus_psql_pass }}@{{ horus_psql_host }}/{{ horus_psql_database }}" {% if horus_log_dir is defined and horus_log_dir != "" %}--log {{ horus_log_dir }}{% endif %}
+
+KillMode=process
+KillSignal=TERM
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

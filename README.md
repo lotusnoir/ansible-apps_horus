@@ -1,11 +1,11 @@
-# Ansible Role: apps_horus
+# Ansible Role: ansible-apps_horus
 
 
 ## Description
 
-[![Build Status](https://travis-ci.com/lotusnoir/apps_horus.svg?branch=master)](https://travis-ci.com/lotusnoir/apps_horus)[![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)[![Ansible Role](https://img.shields.io/badge/ansible%20role-apps__horus-blue)](https://galaxy.ansible.com/lotusnoir/apps_horus/)[![GitHub tag](https://img.shields.io/badge/version-latest-blue)](https://github.com/lotusnoir/apps_horus/tags)
+[![Build Status](https://travis-ci.com/lotusnoir/ansible-apps_horus.svg?branch=master)](https://travis-ci.com/lotusnoir/ansible-apps_horus)[![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)[![Ansible Role](https://img.shields.io/badge/ansible%20role-apps__horus-blue)](https://galaxy.ansible.com/lotusnoir/ansible-apps_horus/)[![GitHub tag](https://img.shields.io/badge/version-latest-blue)](https://github.com/lotusnoir/ansible-apps_horus/tags)
 
-Deploy horus monitoring system using ansible.
+Deploy [horus](https://github.com/kosctelecom/horus) monitoring system using ansible.
 
 ## Requirements
 
@@ -49,7 +49,7 @@ You need to have golang installed locally in order to build the sources.
 	  become_method: sudo
 	  gather_facts: yes
 	  roles:
-	    - role: apps_horus
+	    - role: ansible-apps_horus
 	  vars:
         horus_type:
           - agent

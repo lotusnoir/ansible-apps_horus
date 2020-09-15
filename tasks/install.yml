@@ -47,6 +47,7 @@
       systemd:
         name: "horus-{{ item }}"
         state: stopped
+      ignore_errors: yes
       when: horus_binary.stat.exists and item != "query"
 
     - name: "Propagate {{ item }} binaries"

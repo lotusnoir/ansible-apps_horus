@@ -3,13 +3,16 @@
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/horus-agent \
-          {% if horus_agent_debug is defined and horus_agent_debug != "" %} --debug {{ horus_agent_debug }}{% endif %} \
+{% if horus_agent_debug is defined and horus_agent_debug != 0 %}          --debug {{ horus_agent_debug }} \
+{% endif %}
+{% if horus_log_dir is defined and horus_log_dir != "" %}        --log {{ horus_log_dir }} \
+{% endif %}
           --port {{ horus_agent_port }} \
           --snmp-jobs {{ horus_agent_snmp_jobs }} \
           --stat-frequency {{ horus_agent_stat_freq }} \
           --prom-max-age {{ horus_agent_prom_max_age }} \
-          {% if horus_agent_kafka_host is defined and horus_agent_kafka_host != "" %}--kafka-hosts {{ horus_agent_kafka_host }} --kafka-topic {{ horus_agent_kafka_topic }}{% endif %} \
-          --log {{ horus_log_dir }} \
+{% if horus_agent_kafka_host is defined and horus_agent_kafka_host != "" %}          --kafka-hosts {{ horus_agent_kafka_host }} --kafka-topic {{ horus_agent_kafka_topic }} \
+{% endif %}
           --inter-poll-delay {{ horus_agent_poll_delay }} \
           --fping-max-procs {{ horus_agent_fping_max_procs }} \
           --fping-packet-count {{ horus_agent_fping_pks_count }}

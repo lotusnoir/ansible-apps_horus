@@ -16,12 +16,14 @@ horus_agent_fping_max_procs:        40
 horus_agent_fping_pks_count:        15
 #dispatcher
 horus_dispatcher_port:              81
+horus_dispatcher_loglevel:          0
 horus_dispatcher_snmp_freq:         20
 horus_dispatcher_ping_freq:         15
 horus_dispatcher_keepalive_freq:    15
 horus_dispatcher_max_delta:         0.25
 horus_dispatcher_error_retention:   2
 horus_dispatcher_ping_batch:        100
+horus_dispatcher_lockid:      13743895
 horus_psql_user: horus
 horus_psql_pass: postgresqlpassword
 horus_psql_host: localhost

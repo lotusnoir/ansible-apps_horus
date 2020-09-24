@@ -11,7 +11,7 @@
   when: horus_binary.stat.exists
 
 - name: Installation process
-  when: (not horus_binary.stat.exists) or (horus_binary_version is defined and horus_version[item] not in horus_binary_version.stdout) or not horus_version[item]
+  when: (not horus_binary.stat.exists) or (horus_binary_version is defined and horus_version[item] not in horus_binary_version.stdout or horus_version[item] == "")
   block:
     - name: "Install fping when agent type"
       package:
@@ -24,6 +24,7 @@
         path: "{{ horus_log_dir }}"
         state: directory
         mode: 0755
+      when: horus_log_dir != ""
 
     - name: "Add git repo Horus on {{ horus_src_dir }}"
       become: false
@@ -63,7 +64,7 @@
     - name: "Create symtemd for {{ item }}"
       template:
         src: horus-{{ item }}.service
-        dest: /lib/systemd/system/
+        dest: /etc/systemd/system/
         mode: 0644
 
     - name: "Start horus-{{ item }} service"

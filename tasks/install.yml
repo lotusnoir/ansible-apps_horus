@@ -61,7 +61,7 @@
 
 - when: item != "query"
   block:
-    - name: "Create symtemd for {{ item }}"
+    - name: "Create systemd for {{ item }}"
       template:
         src: horus-{{ item }}.service
         dest: /etc/systemd/system/

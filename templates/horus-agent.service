@@ -11,7 +11,7 @@ ExecStart=/usr/local/bin/horus-agent \
           --snmp-jobs {{ horus_agent_snmp_jobs }} \
           --stat-frequency {{ horus_agent_stat_freq }} \
           --prom-max-age {{ horus_agent_prom_max_age }} \
-{% if horus_agent_kafka_host is defined and horus_agent_kafka_host != "" %}          --kafka-hosts {{ horus_agent_kafka_host }} --kafka-topic {{ horus_agent_kafka_topic }} \
+{% if horus_agent_kafka_host is defined and horus_agent_kafka_host != "" %}          --kafka-hosts {{ horus_agent_kafka_host }} --kafka-topic {{ horus_agent_kafka_topic }} --kafka-partition {{ horus_agent_kafka_partition }}\
 {% endif %}
           --inter-poll-delay {{ horus_agent_poll_delay }} \
           --fping-max-procs {{ horus_agent_fping_max_procs }} \

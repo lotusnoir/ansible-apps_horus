@@ -4,13 +4,14 @@ horus_git_repo:                    "https://github.com/kosctelecom/horus.git"
 horus_src_dir:                     "/tmp/horus"
 horus_log_dir:                     "/var/log/horus"
 #agent
-horus_agent_debug:                  1
+horus_agent_debug:                  0
 horus_agent_port:                   80
 horus_agent_snmp_jobs:              100
 horus_agent_stat_freq:              30
 horus_agent_prom_max_age:           600
 horus_agent_kafka_host:             ""
 horus_agent_kafka_topic:            horus
+horus_agent_kafka_partition:        1
 horus_agent_poll_delay:             250
 horus_agent_fping_max_procs:        40
 horus_agent_fping_pks_count:        15

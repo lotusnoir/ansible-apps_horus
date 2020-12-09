@@ -62,4 +62,4 @@ You need to have golang installed locally in order to build the sources.
 
 ## License
 
-This project is licensed under MIT License. See [LICENSE](/LICENSE) for more details.
+This project is licensed under Apache License. See [LICENSE](/LICENSE) for more details.

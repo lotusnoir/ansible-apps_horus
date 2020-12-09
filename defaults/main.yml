@@ -3,6 +3,7 @@
 horus_git_repo:                    "https://github.com/kosctelecom/horus.git"
 horus_src_dir:                     "/tmp/horus"
 horus_log_dir:                     "/var/log/horus"
+horus_url:                         "https://github.com/kosctelecom/horus/archive/v1.3.2.tar.gz"
 #agent
 horus_agent_debug:                  0
 horus_agent_port:                   80

@@ -3,7 +3,17 @@
 
 ## Description
 
-[![Build Status](https://travis-ci.com/lotusnoir/ansible-apps_horus.svg?branch=master)](https://travis-ci.com/lotusnoir/ansible-apps_horus)[![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)[![Ansible Role](https://img.shields.io/badge/ansible%20role-apps__horus-blue)](https://galaxy.ansible.com/lotusnoir/ansible-apps_horus/)[![GitHub tag](https://img.shields.io/badge/version-latest-blue)](https://github.com/lotusnoir/ansible-apps_horus/tags)
+[![Build Status](https://travis-ci.com/lotusnoir/ansible-apps_horus.svg?branch=master?style=flat)](https://travis-ci.com/lotusnoir/ansible-apps_horus)
+[![License](https://img.shields.io/badge/license-Apache--2.0-brightgreen?style=flat)](https://opensource.org/licenses/Apache-2.0)
+[![Ansible Role](https://img.shields.io/badge/galaxy-apps_horus-purple?style=flat)](https://galaxy.ansible.com/lotusnoir/apps_horus)
+![GitHub repo size](https://img.shields.io/github/repo-size/lotusnoir/ansible-apps_horus?color=orange&style=flat)
+![Ansible Quality Score](https://img.shields.io/ansible/quality/52300)
+[![downloads](https://img.shields.io/ansible/role/d/52300)](https://galaxy.ansible.com/lotusnoir/apps_horus)
+[![Version](https://img.shields.io/github/release/lotusnoir/ansible-apps_horus.svg)](https://github.com/lotusnoir/ansible-apps_horus/releases/)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lotusnoir_ansible-apps_horus&metric=alert_status)](https://sonarcloud.io/dashboard?id=lotusnoir_ansible-apps_horus)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=lotusnoir_ansible-apps_horus&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=lotusnoir_ansible-apps_horus)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=lotusnoir_ansible-apps_horus&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=lotusnoir_ansible-apps_horus)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=lotusnoir_ansible-apps_horus&metric=security_rating)](https://sonarcloud.io/dashboard?id=lotusnoir_ansible-apps_horus)
 
 Deploy [horus](https://github.com/kosctelecom/horus) monitoring system using ansible.
 

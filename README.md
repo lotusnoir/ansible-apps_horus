@@ -1,6 +1,5 @@
 # Ansible Role: ansible-apps_horus
 
-
 ## Description
 
 [![Build Status](https://travis-ci.com/lotusnoir/ansible-apps_horus.svg?branch=master?style=flat)](https://travis-ci.com/lotusnoir/ansible-apps_horus)
@@ -98,7 +97,6 @@ You need to have golang installed locally in order to build the sources.
 	    http_proxy: "{{ http_proxy }}"
 	    https_proxy: "{{ https_proxy }}"
 	    no_proxy: "{{ no_proxy }}"
-
 
 
 ## License

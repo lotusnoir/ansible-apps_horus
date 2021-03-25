@@ -23,35 +23,39 @@ You need to have golang installed locally in order to build the sources.
 
 ## Role variables
 
-| Name           | Default Value | Description                        |
-| -------------- | ------------- | -----------------------------------|
-| `horus_src_dir` | /tmp/horus |  |
-| `horus_log_dir` | /var/log/horus |  |
-| `horus_agent_debug` | 1 |  |
-| `horus_agent_port` | 80 |  |
-| `horus_agent_snmp_jobs` | 100 |  |
-| `horus_agent_stat_freq` |  | 30 |
-| `horus_agent_prom_max_age` | 600 |  |
-| `horus_agent_kafka_host` | "" |  |
-| `horus_agent_kafka_topic` | horus |  |
-| `horus_agent_poll_delay` | 250 |  |
-| `horus_agent_fping_max_procs` | 40 |  |
-| `horus_agent_fping_pks_count` | 15 |  |
-| `horus_dispatcher_port` | 81 |  |
-| `horus_dispatcher_snmp_freq` | 20 |  |
-| `horus_dispatcher_ping_freq` | 15 |  |
-| `horus_dispatcher_keepalive_freq` | 15 |  |
-| `horus_dispatcher_max_delta` | 0.25 |  |
-| `horus_dispatcher_error_retention` | 2 | numbers of retention days for polling errors |
-| `horus_dispatcher_ping_batch` | 100 |  |
-| `horus_psql_user` | horus |  |
-| `horus_psql_pass` | postgresqlpassword |  |
-| `horus_psql_host` | localhost |  |
-| `horus_psql_database` | horus_prod |  |
-| `horus_type` | [] | install agent / query / dispatcher |
-| `horus_version` | "" | install a specific version, latest by default |
+| Name                               | Default Value  | Description                        |
+| ---------------------------------- | -------------- | -----------------------------------|
+| `horus_src_dir`                    | /tmp/horus     | temp folder to build sources |
+| `horus_log_dir`                    | /var/log/horus | log file location|
+| `horus_agent_debug`                | 0              | 1 is debug mode |
+| `horus_agent_port`                 | 80             | listen port |
+| `horus_agent_snmp_jobs`            | 100            | concurent snmp jobs  |
+| `horus_agent_stat_freq`            | 30             | stats refresh seconds |
+| `horus_agent_prom_max_age`         | 600            | max age for metrics to keep |
+| `horus_agent_kafka_host`           | ""             | kafka host |
+| `horus_agent_kafka_topic`          | horus          | kafka topic |
+| `horus_agent_kafka_partition`      | 1              | kafka partition number |
+| `horus_agent_poll_delay`           | 250            | delay between each metrics poll |
+| `horus_agent_fping_max_procs`      | 40             | max process for pings requests |
+| `horus_agent_fping_pks_count`      | 15             | paquets count for pings requests |
+| `horus_dispatcher_port`            | 81             | listen port |
+| `horus_dispatcher_loglevel`        | 0              | 1 for debug mode |
+| `horus_dispatcher_snmp_freq`       | 20             |  |
+| `horus_dispatcher_ping_freq`       | 15             |  |
+| `horus_dispatcher_keepalive_freq`  | 15             |  |
+| `horus_dispatcher_max_delta`       | 0.25           |  |
+| `horus_dispatcher_error_retention` | 2              | numbers of retention days for polling errors |
+| `horus_dispatcher_ping_batch`      | 100            | numbers of concurent ping requests |
+| `horus_psql_user`                  | horus          | bdd user |
+| `horus_psql_pass`                  | strongpass     | bdd password |
+| `horus_psql_host`                  | localhost      | bdd hostname |
+| `horus_psql_database`              | horus_prod     | bdd database |
+| `horus_type`                       | []             | install agent / query / dispatcher |
+| `horus_version`                    | ""             | install a specific version, latest by default |
 
-## Examples
+## Examples 
+
+### install an agent:
 
 	---
 	- hosts: apps_horus
@@ -61,13 +65,40 @@ You need to have golang installed locally in order to build the sources.
 	  roles:
 	    - role: ansible-apps_horus
 	  vars:
+        horus_agent_kafka_host:             "{{ groups['kafka_sys'] | join(',') }}"
+        horus_agent_kafka_topic:            horus
+        horus_agent_kafka_partition:        "{{ ansible_fqdn.split('0')[1][:1] }}"
         horus_type:
           - agent
           - query
 	  environment: 
 	    http_proxy: "{{ http_proxy }}"
 	    https_proxy: "{{ https_proxy }}"
-	    no_proxy: "{{ no_proxy }}
+	    no_proxy: "{{ no_proxy }}"
+
+### install a dispatcher:
+
+	---
+	- hosts: apps_horus
+	  become: yes
+	  become_method: sudo
+	  gather_facts: yes
+	  roles:
+	    - role: ansible-apps_horus
+	  vars:
+        horus_psql_user: horus
+        horus_psql_pass: strongpassword
+        horus_psql_host: 10.64.38.201
+        horus_psql_database: horus_prod
+        horus_type:
+          - dispatcher
+        horus_version: 
+          dispatcher: "v1.4.0"
+	  environment: 
+	    http_proxy: "{{ http_proxy }}"
+	    https_proxy: "{{ https_proxy }}"
+	    no_proxy: "{{ no_proxy }}"
+
 
 
 ## License

@@ -27,7 +27,7 @@ horus_dispatcher_error_retention:   2
 horus_dispatcher_ping_batch:        100
 horus_dispatcher_lockid:      13743895
 horus_psql_user: horus
-horus_psql_pass: postgresqlpassword
+horus_psql_pass: strongpass
 horus_psql_host: localhost
 horus_psql_database: horus_prod
 horus_type:

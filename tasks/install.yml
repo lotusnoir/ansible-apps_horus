@@ -66,6 +66,8 @@
         src: horus-{{ item }}.service
         dest: /etc/systemd/system/
         mode: 0644
+#      notify:
+#        restart horus
 
     - name: "Start horus-{{ item }} service"
       systemd:

@@ -14,7 +14,7 @@ ExecStart=/usr/local/bin/horus-dispatcher \
         --max-load-delta {{ horus_dispatcher_max_delta }} \
         --error-flush-freq 2 \
         --ping-batch-count 100 \
-        --dsn "postgres://{{ horus_psql_user }}:{{ horus_psql_pass }}@{{ horus_psql_host }}/{{ horus_psql_database }}" \
+        --dsn "postgres://{{ horus_psql_user }}:{{ horus_psql_pass }}@{{ horus_psql_host }}:{{ horus_psql_port }}/{{ horus_psql_database }}?sslmode={% if horus_psql_ssl is sameas true %}enable{% else %}disable{% endif %}" \
 {% if horus_log_dir is defined and horus_log_dir != "" %}        --log {{ horus_log_dir }} \
 {% endif %}
 {% if horus_dispatcher_loglevel is defined and horus_dispatcher_loglevel != 0 %}        --debug {{ horus_dispatcher_loglevel }} \

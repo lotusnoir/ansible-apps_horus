@@ -29,7 +29,9 @@ horus_dispatcher_lockid:      13743895
 horus_psql_user: horus
 horus_psql_pass: strongpass
 horus_psql_host: localhost
+horus_psql_port: 5432
 horus_psql_database: horus_prod
+horus_psql_ssl: disable
 horus_type:
   - agent
   - query
